@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 Sign-Up Page
+<table bordder="1">
+    <th>
+        <tr>
+            <td>NickName</td>
+            <td>Email</td>
+            <td>Password</td>
+        </tr>
+        <tr th:each="account : ${lists}">
+            <td th:text="account.nickname"/>
+            <td th:text="account.email"/>
+            <td th:text="account.password"/>
+        </tr>
+    </th>
+</table>
 </body>
 </html>
