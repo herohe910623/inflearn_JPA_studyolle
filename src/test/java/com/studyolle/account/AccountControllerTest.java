@@ -71,6 +71,7 @@ public class AccountControllerTest {
         assertNotEquals(account.getPassword(),"12345678"); // 인코딩 되었기 때문에 해싱 되어서 입력한 비밀번호와 다르다.
         assertNotNull(account);
         assertTrue(accountRepository.existsByEmail("email@email.com"));
+        assertNotNull(account.getEmailCheckToken());
         //SimpleMailMessage 타입의 인스턴스를 아무거나 가지고 send가 호출되었는가를 확인
         then(javaMailSender).should().send(any(SimpleMailMessage.class));
     }
