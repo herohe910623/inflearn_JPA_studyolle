@@ -15,7 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.then;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -44,6 +47,7 @@ public class AccountControllerTest {
                 .andDo(print())
                 .andExpect(view().name("account/sign-up"))
                 .andExpect(model().attributeExists("signUpForm"))
+                .andExpect(unauthenticated())
         ;
     }
 
@@ -56,7 +60,8 @@ public class AccountControllerTest {
                         .param("password", "12345")
                         .with(csrf()))
                 .andExpect(status().isOk())
-                .andExpect(view().name("account/sign-up"));
+                .andExpect(view().name("account/sign-up"))
+                .andExpect(unauthenticated());
     }
 
     @Test
@@ -68,7 +73,8 @@ public class AccountControllerTest {
                         .param("password", "12345678")
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/"));
+                .andExpect(view().name("redirect:/"))
+                .andExpect(authenticated().withUsername("gijin"));
 
         Account account = accountRepository.findByEmail("email@email.com");
         assertNotEquals(account.getPassword(), "12345678"); // 인코딩 되었기 때문에 해싱 되어서 입력한 비밀번호와 다르다.
@@ -88,7 +94,9 @@ public class AccountControllerTest {
                         .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("error"))
-                .andExpect(view().name("account/checked-email"));
+                .andExpect(view().name("account/checked-email"))
+                .andExpect(unauthenticated())
+        ;
     }
 
     @Test
@@ -97,7 +105,7 @@ public class AccountControllerTest {
         Account account = Account.builder()
                 .email("test@email.com")
                 .password("12345678")
-                .nickname("ckeckEmailToken")
+                .nickname("checkEmailToken")
                 .build();
         Account newAccount = accountRepository.save(account);
         newAccount.generateEmailCheckToken();
@@ -110,6 +118,7 @@ public class AccountControllerTest {
                 .andExpect(model().attributeDoesNotExist("error"))
                 .andExpect(model().attributeExists("numberOfUser"))
                 .andExpect(model().attributeExists("nickname"))
-                .andExpect(view().name("account/checked-email"));
+                .andExpect(view().name("account/checked-email"))
+                .andExpect(authenticated().withUsername("checkEmailToken"));
     }
 }
