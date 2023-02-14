@@ -58,7 +58,7 @@ public class AccountService {
     public void login(Account account) {
         //UsernamePasswordAuthenticationToken 는 사실상 AuthenticationManager 내부에서 사용하라고 만들어놓은 생성자이다.
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                account.getNickname(),
+                new UserAccount(account), //principal 객체가 된다.
                 account.getPassword(),
                 List.of(new SimpleGrantedAuthority("ROLE_USER")));
         SecurityContextHolder.getContext().setAuthentication(token);
