@@ -23,7 +23,6 @@ public class AccountController {
 
     private final SignUpFormValidator signUpFormValidator;
     private final AccountService accountService;
-
     private final AccountRepository accountRepository;
 
 
@@ -75,6 +74,7 @@ public class AccountController {
         return "account/check-email";
     }
 
+    @GetMapping("/resend-confirm-email")
     public String resendConfirmEmail(@CurrentUser Account account, Model model) {
         if (! account.canSendConfirmEmail()) {
             model.addAttribute("error","인증 이메일은 1시간에 한번만 전송할 수 있습니다.");
