@@ -29,6 +29,7 @@ public class Account {
     private String location;
     @Lob @Basic(fetch = FetchType.EAGER)
     private String profileImage;
+    private String company;
     private boolean studyCreatedByEmail;
     private boolean studyCreatedByWeb;
     private boolean studyEnrollmentResultByEmail;
