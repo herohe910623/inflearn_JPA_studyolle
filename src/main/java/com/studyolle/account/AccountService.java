@@ -21,6 +21,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AccountService implements UserDetailsService {
 
     private final AccountRepository accountRepository;
@@ -28,7 +29,7 @@ public class AccountService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
 //    private final AuthenticationManager authenticationManager; 빈 주입하려면 스프링 시큐리티 설정을 다르게 해줘야한다.
-    @Transactional
+
     public Account processNewAccount(SignUpForm signUpForm) {
         Account newAccount = saveNewAccount(signUpForm);
         newAccount.generateEmailCheckToken();
@@ -72,7 +73,7 @@ public class AccountService implements UserDetailsService {
 //        SecurityContext context = SecurityContextHolder.getContext();
 //        context.setAuthentication(authentication);
     }
-
+    @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String emailOrNickname) throws UsernameNotFoundException {
         Account account = accountRepository.findByEmail(emailOrNickname);
@@ -83,5 +84,10 @@ public class AccountService implements UserDetailsService {
             throw new UsernameNotFoundException(emailOrNickname);
         }
         return new UserAccount(account);
+    }
+
+    public void completeSignUp(Account account) {
+        account.completeSignUp();
+        login(account);
     }
 }

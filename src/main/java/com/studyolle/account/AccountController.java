@@ -62,8 +62,10 @@ public class AccountController {
             model.addAttribute("error","wrong.token");
             return view;
         }
-        account.completeSignUp();
-        accountService.login(account); //정석적인 방법은 아님,
+
+        accountService.completeSignUp(account);    // Transaction 버그 때문에 Service로 옮겨줌 23.
+
+//        accountService.login(account); //정석적인 방법은 아님,
         model.addAttribute("numberOfUser",accountRepository.count()); //회원 가입수
         model.addAttribute("nickname",account.getNickname());
         return view;
