@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="col-8">
-            <div class="tab-content" id="v-pillstabContent">
+            <div class="tab-content" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-intro-tab">
                     <p th:if="${!#strings.isEmpty(account.url)}">
                         <span style="font-size:20px">
@@ -45,17 +45,23 @@
                         </span>
                         <span th:text="${account.url}" class="col-11"></span>
                     </p>
-                    <p th:if="${!#strings.isEmpty(account.company)}">
+                    <p th:if="${!#strings.isEmpty(account.occupation)}">
                         <span style="font-size:20px">
                             <i class="fa fa-briefcase col-1"></i>
                         </span>
-                        <span th:text="${account.company}" class="col-9"></span>
+                        <span th:text="${account.occupation}" class="col-9"></span>
+                    </p>
+                    <p th:if="${!#strings.isEmpty(account.location)}">
+                        <span style="font-size:20px">
+                            <i class="fa fa-location-arrow col-1"></i>
+                            <span th:text="${account.location}" class="col-9"></span>
+                        </span>
                     </p>
                     <p th:if="${isOwner}">
                         <span style="font-size:20px">
                             <i class="fa fa-envelope-o col-1"></i>
-                            <span th:text="${account.email}" class="col-9"></span>
                         </span>
+                        <span th:text="${account.email}" class="col-9"></span>
                     </p>
                     <p th:if="${isOwner || account.emailVerified}">
                         <span style="font-size:20px">
