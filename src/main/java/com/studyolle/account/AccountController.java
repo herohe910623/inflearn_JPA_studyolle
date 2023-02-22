@@ -63,7 +63,7 @@ public class AccountController {
             return view;
         }
 
-        accountService.completeSignUp(account);    // Transaction 버그 때문에 Service로 옮겨줌 23.
+        accountService.completeSignUp(account);    // 23.Transaction 버그 때문에 Service로 옮겨줌
 
 //        accountService.login(account); //정석적인 방법은 아님,
         model.addAttribute("numberOfUser",accountRepository.count()); //회원 가입수
