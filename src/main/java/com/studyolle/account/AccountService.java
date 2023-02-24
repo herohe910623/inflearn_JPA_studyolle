@@ -97,7 +97,8 @@ public class AccountService implements UserDetailsService {
         account.setUrl(profile.getUrl());
         account.setOccupation(profile.getOccupation());
         account.setLocation(profile.getLocation());
-        //TODO 프로필 이미지
+        //프로필 이미지
+        account.setProfileImage(profile.getProfileImage());
         accountRepository.save(account);    // 이미 detached 되었던 @CurrentUser account를 (session이 끝났던) 디비에서 id로 찾아서 merge 시켜준다. (update)
         //TODO 하나 더 문제가 남아있다.
     }
