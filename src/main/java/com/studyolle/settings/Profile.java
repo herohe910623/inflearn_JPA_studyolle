@@ -16,8 +16,11 @@ public class Profile {
     private String occupation;
     @Length(max = 50)
     private String location;
-
     private String profileImage;
+
+    @Length(min = 8, max = 50)
+    private String newPassword;
+
     public Profile(Account account) {
         this.bio = account.getBio();
         this.url = account.getUrl();
@@ -25,4 +28,6 @@ public class Profile {
         this.location = account.getLocation();
         this.profileImage = account.getProfileImage();
     }
+
+
 }

@@ -100,6 +100,11 @@ public class AccountService implements UserDetailsService {
         //프로필 이미지
         account.setProfileImage(profile.getProfileImage());
         accountRepository.save(account);    // 이미 detached 되었던 @CurrentUser account를 (session이 끝났던) 디비에서 id로 찾아서 merge 시켜준다. (update)
-        //TODO 하나 더 문제가 남아있다.
+        // 하나 더 문제가 남아있다. MainNav 에 있는 작은 프로필 사진 변경하게끔 Fragments.html 에 코드 수정
+    }
+
+    public void updatePassword(Account account, String newPassword) {
+        account.setPassword(passwordEncoder.encode(newPassword));
+        accountRepository.save(account);    // 이미 detached 되었던 @CurrentUser account를 (session이 끝났던) 디비에서 id로 찾아서 merge 시켜준다. (update)
     }
 }
