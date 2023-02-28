@@ -1,7 +1,7 @@
 package com.studyolle.account;
 
+import com.studyolle.account.form.SignUpForm;
 import com.studyolle.domain.Account;
-import com.studyolle.settings.form.NicknameForm;
 import com.studyolle.settings.form.Notifications;
 import com.studyolle.settings.form.Profile;
 import lombok.RequiredArgsConstructor;
@@ -120,5 +120,15 @@ public class AccountService implements UserDetailsService {
         account.setNickname(nickname);
         accountRepository.save(account);
         login(account);
+    }
+
+    public void sendLoginLink(Account account) {
+        account.generateEmailCheckToken();
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(account.getEmail());
+        mailMessage.setSubject("스터디올래, 로그인 링크");
+        mailMessage.setText("/login-by-email?token=" + account.getEmailCheckToken()
+                + "&email=" + account.getEmail());
+        javaMailSender.send(mailMessage);
     }
 }

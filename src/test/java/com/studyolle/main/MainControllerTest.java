@@ -2,15 +2,13 @@ package com.studyolle.main;
 
 import com.studyolle.account.AccountRepository;
 import com.studyolle.account.AccountService;
-import com.studyolle.account.SignUpForm;
+import com.studyolle.account.form.SignUpForm;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;

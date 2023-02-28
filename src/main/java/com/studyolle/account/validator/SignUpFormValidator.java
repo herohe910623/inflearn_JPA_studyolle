@@ -1,11 +1,11 @@
-package com.studyolle.account;
+package com.studyolle.account.validator;
 
+import com.studyolle.account.AccountRepository;
+import com.studyolle.account.form.SignUpForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 
 @Component
 @RequiredArgsConstructor
