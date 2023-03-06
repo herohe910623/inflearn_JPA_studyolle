@@ -20,6 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -135,6 +137,10 @@ public class SettingsController {
     @GetMapping(SETTINGS_TAGS_URL)
     public String updateTagsForm(@CurrentUser Account account, Model model) {
         model.addAttribute(account);
+        Set<Tag> tags = accountService.getTags(account);
+        // 문자열 타입의 리스트로 담을 예정
+        model.addAttribute("tags",tags.stream().map(Tag::getTitle).collect(Collectors.toList()));
+
         return SETTINGS_TAGS_VIEW_NAME;
     }
 
