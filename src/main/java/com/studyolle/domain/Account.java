@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Account {
 
     @Id @GeneratedValue
-    private Integer Id;
+    private Long Id;
     @Column(unique = true)
     private String email;
     @Column(unique = true)
