@@ -1,5 +1,8 @@
 package com.studyolle.zone;
 
+import com.studyolle.account.AccountRepository;
+import com.studyolle.account.AccountService;
+import com.studyolle.domain.Account;
 import com.studyolle.domain.Zone;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
@@ -12,6 +15,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
