@@ -41,7 +41,6 @@ public class Account {
     private boolean studyUpdatedByWeb = true;
     @ManyToMany
     private Set<Tag> tags = new HashSet<>();
-
     @ManyToMany
     private Set<Zone> zones = new HashSet<>();
 
