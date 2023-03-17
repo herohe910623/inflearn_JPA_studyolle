@@ -1,6 +1,8 @@
 package com.studyolle.account;
 
 import com.studyolle.domain.Account;
+import com.studyolle.mail.EmailMessage;
+import com.studyolle.mail.EmailService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,7 @@ public class AccountControllerTest {
     private AccountRepository accountRepository;
 
     @MockBean
-    JavaMailSender javaMailSender;
+    EmailService emailService;
 
 
     @Test
@@ -82,7 +84,7 @@ public class AccountControllerTest {
         assertTrue(accountRepository.existsByEmail("email@email.com"));
         assertNotNull(account.getEmailCheckToken());
         //SimpleMailMessage 타입의 인스턴스를 아무거나 가지고 send가 호출되었는가를 확인
-        then(javaMailSender).should().send(any(SimpleMailMessage.class));
+        then(emailService).should().sendEmail(any(EmailMessage.class));
     }
 
     @Test
