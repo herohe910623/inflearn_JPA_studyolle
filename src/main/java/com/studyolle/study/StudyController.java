@@ -7,6 +7,7 @@ import com.studyolle.study.form.StudyForm;
 import com.studyolle.study.validator.StudyFormValidator;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -41,8 +42,9 @@ public class StudyController {
     }
 
     @PostMapping("/new-study")
-    public String newStudySubmit(@CurrentAccount Account account, @Valid StudyForm studyForm, Errors errors) {
+    public String newStudySubmit(@CurrentAccount Account account, @Valid StudyForm studyForm, Errors errors, Model model) {
         if (errors.hasErrors()) {
+            model.addAttribute(account);
             return "study/form";
         }
         Study newStudy = studyService.createNewStudy(modelMapper.map(studyForm,Study.class), account);
@@ -56,5 +58,11 @@ public class StudyController {
         return "study/view";
     }
 
+    @GetMapping("/study/{path}/members")
+    public String viewStudyMembers(@CurrentAccount Account account, @PathVariable String path, Model model) {
+        model.addAttribute(account);
+        model.addAttribute(studyRepository.findByPath(path));
+        return "study/members";
+    }
 
 }
