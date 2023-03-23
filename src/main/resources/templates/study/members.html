@@ -15,10 +15,6 @@
     <div th:replace="fragments.html::member-list(members=${study.managers}, isManager=${true})"></div>
     <div th:replace="fragments.html::member-list(members=${study.members}, isManager=${false})"></div>
 
-    <div class="row px-3 justify-content-center">
-        <div class="col-10 pt-3" th:utext="${study.fullDescription}"></div>
-    </div>
-
     <footer th:replace="fragments.html::footer"></footer>
 </div>
 <script type="application/javascript">
