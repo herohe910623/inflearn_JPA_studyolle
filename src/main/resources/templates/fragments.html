@@ -24,6 +24,19 @@
             margin: 0;
         }
 
+        #study-logo {
+            height: 200px;
+            width: 100%;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
+        #study-logo img {
+            height: auto;
+            width: 100%;
+            overflow: hidden;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
@@ -273,15 +286,15 @@
 
 <div th:fragment="study-settings-menu (currentMenu)" class="list-group">
     <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'description'}? active"
-       href="#" th:href="@{'/study/' + ${study.path} + 'settings/description'}">소개</a>
-    <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'image'}? active"
-       href="#" th:href="@{'/study/' + ${study.path} + 'settings/image'}">배너 이미지</a>
+       href="#" th:href="@{'/study/' + ${study.path} + '/settings/description'}">소개</a>
+    <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'banner'}? active"
+       href="#" th:href="@{'/study/' + ${study.path} + '/settings/banner'}">배너 이미지</a>
     <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'tags'}? active"
-       href="#" th:href="@{'/study/' + ${study.path} + 'settings/tags'}">스터디 주제</a>
+       href="#" th:href="@{'/study/' + ${study.path} + '/settings/tags'}">스터디 주제</a>
     <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'zones'}? active"
-       htef="#" th:href="@{'/study/' + ${study.path} + 'settings/zones'}">활동 지역</a>
+       htef="#" th:href="@{'/study/' + ${study.path} + '/settings/zones'}">활동 지역</a>
     <a class="list-group-item list-group-item-action list-group-item-danger" th:classappend="${currentMenu == 'study'}? active"
-       href="#" th:href="@{'/study/' + ${study.path} + 'settings/study'}">스터디</a>
+       href="#" th:href="@{'/study/' + ${study.path} + '/settings/study'}">스터디</a>
 </div>
 
 <div th:fragment="editor-script">
@@ -304,5 +317,12 @@
         <span aria-hidden="treu">x</span>
     </button>
 </div>
+
+<script type="application/javascript" th:fragment="tooltip">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+
 
 </html>

@@ -17,10 +17,6 @@
 
     <footer th:replace="fragments.html::footer"></footer>
 </div>
-<script type="application/javascript">
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-</script>
+<script th:replace="fragments.html :: tooltip"></script>
 </body>
 </html>
