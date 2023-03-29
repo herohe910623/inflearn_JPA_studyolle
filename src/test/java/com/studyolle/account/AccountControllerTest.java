@@ -40,7 +40,6 @@ public class AccountControllerTest {
     @MockBean
     EmailService emailService;
 
-
     @Test
     @DisplayName("회원 가입 화면이 보이는지 테스트")
     public void signUpForm() throws Exception {
