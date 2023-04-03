@@ -29,6 +29,7 @@
         </div>
         <footer th:replace="fragments.html :: footer"></footer>
     </div>
+    <script th:replace="fragments.html :: tooltip"></script>
     <script th:replace="fragments.html :: ajax-csrf-header"></script>
     <script th:replace="fragments.html :: update-tags(baseUrl='/study/' + ${study.path} + '/settings/tags')"></script>
 </body>

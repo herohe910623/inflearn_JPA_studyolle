@@ -28,7 +28,7 @@ class StudyTest {
     void isJoinable_false_for_member() {
         study.setPublished(true);
         study.setRecruiting(true);
-        study.addManager(account);
+        study.addMember(account);
 
         assertFalse(study.isJoinable(userAccount));
     }
