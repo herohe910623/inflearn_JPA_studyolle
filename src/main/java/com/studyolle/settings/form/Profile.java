@@ -17,8 +17,6 @@ public class Profile {
     private String location;
     private String profileImage;
 
-    @Length(min = 8, max = 50)
-    private String newPassword;
 
 
 }

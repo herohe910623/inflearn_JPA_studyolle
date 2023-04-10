@@ -2,6 +2,7 @@ package com.studyolle.study;
 
 import com.studyolle.WithAccount;
 import com.studyolle.account.AccountRepository;
+import com.studyolle.account.UserAccount;
 import com.studyolle.domain.Account;
 import com.studyolle.domain.Study;
 import lombok.RequiredArgsConstructor;
@@ -104,4 +105,5 @@ class StudyControllerTest {
                 .andExpect(model().attributeExists("account"))
                 .andExpect(model().attributeExists("study"));
     }
+
 }
