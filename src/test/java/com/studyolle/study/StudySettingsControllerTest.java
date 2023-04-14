@@ -82,7 +82,6 @@ class StudySettingsControllerTest extends StudyControllerTest {
                 .andExpect(model().attributeExists("studyDescriptionForm"))
                 .andExpect(model().attributeExists("account"))
                 .andExpect(model().attributeExists("study"));
-
     }
 
 }
