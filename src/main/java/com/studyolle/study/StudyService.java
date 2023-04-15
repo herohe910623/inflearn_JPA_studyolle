@@ -4,6 +4,8 @@ import com.studyolle.domain.Account;
 import com.studyolle.domain.Study;
 import com.studyolle.domain.Tag;
 import com.studyolle.domain.Zone;
+import com.studyolle.event.EventRepository;
+import com.studyolle.event.form.EventForm;
 import com.studyolle.study.form.StudyDescriptionForm;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,6 +22,7 @@ public class StudyService {
 
     private final StudyRepository studyRepository;
     private final ModelMapper modelMapper;
+    private final EventRepository eventRepository;
 
     public Study createNewStudy(Study study, Account account) {
         Study newStudy = studyRepository.save(study);
