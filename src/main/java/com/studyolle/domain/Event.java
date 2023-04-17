@@ -1,5 +1,6 @@
 package com.studyolle.domain;
 
+import com.studyolle.account.UserAccount;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ public class Event {
     @ManyToOne
     private Study study;
     @ManyToOne
-    private Account createBy;
+    private Account createdBy;
     @Column(nullable = false)
     private String title;
     @Lob
@@ -30,10 +31,42 @@ public class Event {
     private LocalDateTime startDateTime;
     @Column(nullable = false)
     private LocalDateTime endDateTime;
-    @Column(nullable = true)
-    private Integer limitEnrollments;
+    @Column
+    private Integer limitOfEnrollments;
     @OneToMany(mappedBy = "event")
     private List<Enrollment> enrollments;
     @Enumerated(EnumType.STRING) //기본값인 ORDINAL 이면 매핑순서가 꼬일수 있다. (배열 순서대로이기 때문)
     private EventTypes eventTypes;
+
+    public boolean isEnrollableFor(UserAccount userAccount) {
+        return isNotClosed() && !isAlreadyEnrolled(userAccount);
+    }
+
+    public boolean isDisEnrollableFor(UserAccount userAccount) {
+        return isNotClosed() && isAlreadyEnrolled(userAccount);
+    }
+
+    private boolean isAlreadyEnrolled(UserAccount userAccount) {
+        Account account = userAccount.getAccount();
+        for (Enrollment e : this.enrollments) {
+            if (e.getAccount().equals(account)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean isNotClosed() {
+        return this.endEnrollmentDateTime.isAfter(LocalDateTime.now());
+    }
+
+    public boolean isAttended(UserAccount userAccount) {
+        Account account = userAccount.getAccount();
+        for (Enrollment e : this.enrollments) {
+           if (e.getAccount().equals(account) && e.isAttended()) {
+               return true;
+           }
+        }
+        return false;
+    }
+
 }
