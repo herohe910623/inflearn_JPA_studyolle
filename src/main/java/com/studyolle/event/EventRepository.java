@@ -1,5 +1,6 @@
 package com.studyolle.event;
 
+import com.studyolle.domain.Account;
 import com.studyolle.domain.Event;
 import com.studyolle.domain.Study;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -13,4 +14,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     @EntityGraph(value = "Event.withEnrollments", type = EntityGraph.EntityGraphType.LOAD)
     List<Event> findByStudyOrderByStartDateTime(Study study);
+
+
 }

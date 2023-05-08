@@ -109,13 +109,13 @@ public class EventController {
                                     Model model) {
         Study study = studyService.getStudyToUpdate(account, path);
         Event event = eventRepository.findById(id).orElseThrow();
-        eventForm.setEventTypes(event.getEventTypes());
+        eventForm.setEventType(event.getEventType());
         eventValidator.validateUpdateForm(eventForm, event, errors);
 
         if (errors.hasErrors()) {
             model.addAttribute(study);
             model.addAttribute(account);
-            model.addAttribute(event);
+             model.addAttribute(event);
             return "event/update-form";
         }
 
@@ -125,12 +125,24 @@ public class EventController {
 
 //    @PostMapping("/events/{id}/delete")
     @DeleteMapping("/events/{id}")
-    public String cancelEvent(@CurrentAccount Account account, @PathVariable String path, @PathVariable Long id,
-                              Model model) {
+    public String cancelEvent(@CurrentAccount Account account, @PathVariable String path, @PathVariable Long id) {
         Study study = studyService.getStudyToUpdateStatus(account, path);
         eventService.deleteEvent(eventRepository.findById(id).orElseThrow());
         return "redirect:/study/" + study.getEncodedPath() + "/events";
     }
 
+    @PostMapping("/events/{id}/enroll")
+    public String newEnrollment(@CurrentAccount Account account, @PathVariable String path, @PathVariable Long id) {
+        Study study = studyService.getStudyToEnroll(path);
+        eventService.newEnrollment(eventRepository.findById(id).orElseThrow(), account);
+        return "redirect:/study/" + study.getEncodedPath() + "/events/" + id;
+    }
+
+    @PostMapping("/events/{id}/disenroll")
+    public String cancelEnrollment(@CurrentAccount Account account, @PathVariable String path, @PathVariable Long id) {
+        Study study = studyService.getStudyToEnroll(path);
+        eventService.cancelEnrollment(eventRepository.findById(id).orElseThrow(), account);
+        return "redirect:/study/" + study.getEncodedPath() + "/events/" + id;
+    }
 
 }

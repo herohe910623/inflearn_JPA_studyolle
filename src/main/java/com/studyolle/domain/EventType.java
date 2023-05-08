@@ -1,5 +1,5 @@
 package com.studyolle.domain;
 
-public enum EventTypes {
+public enum EventType {
     FCFS, CONFIRMATIVE;
 }

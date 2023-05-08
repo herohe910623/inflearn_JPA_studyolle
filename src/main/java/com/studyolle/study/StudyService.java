@@ -5,7 +5,6 @@ import com.studyolle.domain.Study;
 import com.studyolle.domain.Tag;
 import com.studyolle.domain.Zone;
 import com.studyolle.event.EventRepository;
-import com.studyolle.event.form.EventForm;
 import com.studyolle.study.form.StudyDescriptionForm;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -150,5 +149,11 @@ public class StudyService {
 
     public void removeMembers(Study study, Account account) {
         study.removeMember(account);
+    }
+
+    public Study getStudyToEnroll(String path) {
+        Study study = studyRepository.findStudyOnlyByPath(path);
+        checkIfExistingStudy(path, study);
+        return study;
     }
 }

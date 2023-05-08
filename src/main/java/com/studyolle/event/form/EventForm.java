@@ -1,6 +1,6 @@
 package com.studyolle.event.form;
 
-import com.studyolle.domain.EventTypes;
+import com.studyolle.domain.EventType;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,7 +16,7 @@ public class EventForm {
     @Length(max = 50)
     private String title;
     private String description;
-    private EventTypes eventTypes = EventTypes.FCFS;
+    private EventType eventType = EventType.FCFS;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime endEnrollmentDateTime;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
