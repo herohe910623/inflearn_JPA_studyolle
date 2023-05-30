@@ -1,5 +1,7 @@
 package com.studyolle.modules.study;
 
+import com.studyolle.infra.MockMvcTest;
+import com.studyolle.modules.account.AccountFactory;
 import com.studyolle.modules.account.WithAccount;
 import com.studyolle.modules.account.AccountRepository;
 import com.studyolle.modules.account.Account;
@@ -18,16 +20,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@Transactional
-@SpringBootTest
-@AutoConfigureMockMvc
-@RequiredArgsConstructor
+@MockMvcTest
 public class StudyControllerTest {
 
     @Autowired protected MockMvc mockMvc;
     @Autowired protected StudyService studyService;
     @Autowired protected StudyRepository studyRepository;
     @Autowired protected AccountRepository accountRepository;
+    @Autowired StudyFactory studyFactory;
+    @Autowired AccountFactory accountFactory;
 
 //    @AfterEach
 //    void afterEach() {
@@ -107,8 +108,8 @@ public class StudyControllerTest {
     @WithAccount("herohe")
     @DisplayName("스터디 가입")
     void joinStudy() throws Exception {
-        Account manager = createAccount("manager");
-        Study study = createStudy("test-study",manager);
+        Account manager = accountFactory.createAccount("manager");
+        Study study = studyFactory.createStudy("test-study",manager);
 
         mockMvc.perform(get("/study/" + study.getPath() + "/join"))
                 .andExpect(status().is3xxRedirection())
@@ -122,8 +123,8 @@ public class StudyControllerTest {
     @WithAccount("herohe")
     @DisplayName("스터디 탈퇴")
     void leaveStudy() throws Exception {
-        Account manager = createAccount("manager");
-        Study study = createStudy("leave-study", manager);
+        Account manager = accountFactory.createAccount("manager");
+        Study study = studyFactory.createStudy("leave-study", manager);
 
         Account herohe = accountRepository.findByNickname("herohe");
         studyService.addMember(study, herohe);
@@ -136,20 +137,20 @@ public class StudyControllerTest {
     }
 
 
-    protected Study createStudy(String path, Account manager) {
-        Study study = new Study();
-        study.setPath(path);
-        studyService.createNewStudy(study,manager);
-        return study;
-    }
+//    protected Study createStudy(String path, Account manager) {
+//        Study study = new Study();
+//        study.setPath(path);
+//        studyService.createNewStudy(study,manager);
+//        return study;
+//    }
 
-    protected Account createAccount(String nickname) {
-        Account account = new Account();
-        account.setNickname(nickname);
-        account.setEmail(nickname + "@email.com");
-        accountRepository.save(account);
-        return account;
-    }
+//    protected Account createAccount(String nickname) {
+//        Account account = new Account();
+//        account.setNickname(nickname);
+//        account.setEmail(nickname + "@email.com");
+//        accountRepository.save(account);
+//        return account;
+//    }
 
 
 }

@@ -2,13 +2,11 @@ package com.studyolle.modules.study;
 
 import com.studyolle.modules.account.Account;
 import com.studyolle.modules.account.UserAccount;
-import com.studyolle.modules.study.Study;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 class StudyTest {
 
