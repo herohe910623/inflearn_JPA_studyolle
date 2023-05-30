@@ -1,5 +1,6 @@
 package com.studyolle.modules.account;
 
+import com.studyolle.infra.AbstractContainerBaseTest;
 import com.studyolle.infra.MockMvcTest;
 import com.studyolle.infra.mail.EmailMessage;
 import com.studyolle.infra.mail.EmailService;
@@ -26,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @MockMvcTest
-public class AccountControllerTest {
+public class AccountControllerTest extends AbstractContainerBaseTest {
 
     @Autowired
     private MockMvc mockMvc;
