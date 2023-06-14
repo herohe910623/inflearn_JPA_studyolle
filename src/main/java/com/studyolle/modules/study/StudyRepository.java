@@ -1,8 +1,12 @@
 package com.studyolle.modules.study;
 
+import com.studyolle.modules.tag.Tag;
+import com.studyolle.modules.zone.Zone;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
 
 
 @Transactional(readOnly = true)
@@ -26,4 +30,7 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
     Study findStudyWithMembersByPath(String path);
 
     Study findStudyOnlyByPath(String path);
+
+    @EntityGraph(value = "Study.withZonesAndTags", type = EntityGraph.EntityGraphType.FETCH)
+    Study findStudyZonesAndTagsById(Long id);
 }
