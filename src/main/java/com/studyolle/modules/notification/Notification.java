@@ -19,7 +19,7 @@ public class Notification {
     private boolean checked;
     @ManyToOne
     private Account account;
-    private LocalDateTime createdLocalDateTime;
+    private LocalDateTime createdDateTime;
     @Enumerated(EnumType.STRING)
     private NotificationType notificationType;
 }
