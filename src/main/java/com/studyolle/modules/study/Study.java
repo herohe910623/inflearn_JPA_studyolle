@@ -13,25 +13,26 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@NamedEntityGraph(name = "Study.withAll", attributeNodes = {
-        @NamedAttributeNode("tags"),
-        @NamedAttributeNode("zones"),
-        @NamedAttributeNode("managers"),
-        @NamedAttributeNode("members")})
-@NamedEntityGraph(name = "Study.withTagsAndManagers", attributeNodes = {
-        @NamedAttributeNode("tags"),
-        @NamedAttributeNode("managers")})
-@NamedEntityGraph(name = "Study.withZonesAndManagers", attributeNodes = {
-        @NamedAttributeNode("zones"),
-        @NamedAttributeNode("managers")})
-@NamedEntityGraph(name = "Study.withManagers", attributeNodes = {
-        @NamedAttributeNode("managers")})
-@NamedEntityGraph(name = "Study.withMembers", attributeNodes = {
-        @NamedAttributeNode("members")})
-@NamedEntityGraph(name = "Study.withZonesAndTags", attributeNodes =  {
-        @NamedAttributeNode("zones"),
-        @NamedAttributeNode("tags")
-})
+//StudyRepository에서 @EntityGraph를 다르게 사용함으로 지워줘도 된다.
+//@NamedEntityGraph(name = "Study.withAll", attributeNodes = {
+//        @NamedAttributeNode("tags"),
+//        @NamedAttributeNode("zones"),
+//        @NamedAttributeNode("managers"),
+//        @NamedAttributeNode("members")})
+//@NamedEntityGraph(name = "Study.withTagsAndManagers", attributeNodes = {
+//        @NamedAttributeNode("tags"),
+//        @NamedAttributeNode("managers")})
+//@NamedEntityGraph(name = "Study.withZonesAndManagers", attributeNodes = {
+//        @NamedAttributeNode("zones"),
+//        @NamedAttributeNode("managers")})
+//@NamedEntityGraph(name = "Study.withManagers", attributeNodes = {
+//        @NamedAttributeNode("managers")})
+//@NamedEntityGraph(name = "Study.withMembers", attributeNodes = {
+//        @NamedAttributeNode("members")})
+//@NamedEntityGraph(name = "Study.withZonesAndTags", attributeNodes =  {
+//        @NamedAttributeNode("zones"),
+//        @NamedAttributeNode("tags")
+//})
 @Entity
 @Getter
 @Setter
