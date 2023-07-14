@@ -112,7 +112,7 @@ StudyService {
     }
     public void close(Study study) {
         study.close();
-        eventPublisher.publishEvent(new StudyUpdateEvent(study, "스터디를 종했습니다."));
+        eventPublisher.publishEvent(new StudyUpdateEvent(study, "스터디를 종료했습니다."));
     }
     public void startRecruit(Study study) {
         study.startRecruit();

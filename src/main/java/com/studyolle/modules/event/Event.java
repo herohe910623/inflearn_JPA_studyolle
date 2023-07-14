@@ -42,6 +42,7 @@ public class Event {
     @Column
     private Integer limitOfEnrollments;
     @OneToMany(mappedBy = "event")
+    @OrderBy("enrolledAt")
     private List<Enrollment> enrollments = new ArrayList<>();
     @Enumerated(EnumType.STRING) //기본값인 ORDINAL 이면 매핑순서가 꼬일수 있다. (배열 순서대로이기 때문)
     private EventType eventType;
