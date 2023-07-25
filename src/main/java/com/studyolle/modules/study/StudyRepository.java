@@ -10,7 +10,7 @@ import java.util.Set;
 
 
 @Transactional(readOnly = true)
-public interface StudyRepository extends JpaRepository<Study, Long> {
+public interface StudyRepository extends JpaRepository<Study, Long> ,StudyRepositoryExtension{
 
     boolean existsByPath(String path);
 
