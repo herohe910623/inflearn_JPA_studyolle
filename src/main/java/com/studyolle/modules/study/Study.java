@@ -70,6 +70,7 @@ public class Study {
     private boolean published;
     private boolean closed;
     private boolean useBanner;
+    private int memberCount;
 
     public void addManager(Account account) {
         this.managers.add(account);
@@ -91,6 +92,7 @@ public class Study {
 
     public void addMember(Account account) {
         this.getMembers().add(account);
+        this.memberCount++;
     }
 
     public String getImage() {
@@ -147,6 +149,7 @@ public class Study {
 
     public void removeMember(Account account) {
         this.getMembers().remove(account);
+        this.memberCount--;
     }
 
     public boolean isManagedBy(Account account) {
