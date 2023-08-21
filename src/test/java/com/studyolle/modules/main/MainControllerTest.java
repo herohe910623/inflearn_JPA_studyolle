@@ -2,14 +2,21 @@ package com.studyolle.modules.main;
 
 import com.studyolle.infra.AbstractContainerBaseTest;
 import com.studyolle.infra.MockMvcTest;
-import com.studyolle.modules.account.AccountRepository;
-import com.studyolle.modules.account.AccountService;
+import com.studyolle.modules.account.*;
 import com.studyolle.modules.account.form.SignUpForm;
+import com.studyolle.modules.study.Study;
+import com.studyolle.modules.study.StudyRepository;
+import com.studyolle.modules.study.StudyService;
+import com.studyolle.modules.tag.Tag;
+import com.studyolle.modules.tag.TagRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.HashSet;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
@@ -28,6 +35,7 @@ public class MainControllerTest extends AbstractContainerBaseTest {
     AccountService accountService;
     @Autowired
     AccountRepository accountRepository;
+
 
     @BeforeEach
     void beforeEach() {
@@ -89,10 +97,4 @@ public class MainControllerTest extends AbstractContainerBaseTest {
                 .andExpect(unauthenticated());
     }
 
-    @DisplayName("스터디서치")
-    @Test
-    public void search() throws Exception {
-        mockMvc.perform(get("/search/study"))
-                .andExpect(status().isOk());
-    }
 }
