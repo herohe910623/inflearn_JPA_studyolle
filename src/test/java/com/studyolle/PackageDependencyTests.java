@@ -15,17 +15,18 @@ public class PackageDependencyTests {
     private static final String ACCOUNT = "..modules.account..";
     private static final String TAG = "..modules.tag..";
     private static final String ZONE = "..modules.zone..";
+    private static final String MAIN = "..modules.main..";
 
     // modules 패키지는 modules 에서만 참조를 할 수 있다.
     @ArchTest
     ArchRule modulesPackageRule = classes().that().resideInAPackage("com.studyolle.modules..")
             .should().onlyBeAccessed().byClassesThat()
             .resideInAnyPackage("com.studyolle.modules..");
-    // Study 패키지에 접근 하는 클래스들은 오직 STUDY와 EVENT 에 있는 패키지에 있는 클래스들만 접근이 가능하다.
+    // Study 패키지에 접근 하는 클래스들은 오직 STUDY와 EVENT 또한 마지막수업 MAIN 에 있는 패키지에 있는 클래스들만 접근이 가능하다.
     @ArchTest
     ArchRule studyPackageRule = classes().that().resideInAPackage(STUDY)
             .should().onlyBeAccessed().byClassesThat()
-            .resideInAnyPackage(STUDY, EVENT);
+            .resideInAnyPackage(STUDY, EVENT, MAIN);
     // Event 패키지 클래스 들은 EVENT , ACCOUNT, STUDY 패키지 클래스들에 접근 해야 한다.
     @ArchTest
     ArchRule eventPackageRule = classes().that().resideInAPackage(EVENT)
@@ -38,4 +39,8 @@ public class PackageDependencyTests {
     @ArchTest
     ArchRule cycleCheck = slices().matching("com.studyolle.modules.(*)..")
             .should().beFreeOfCycles();
+
+    @ArchTest
+    ArchRule mainPackageRule = classes().that().resideInAPackage(MAIN)
+            .should().accessClassesThat().resideInAnyPackage(MAIN,ACCOUNT,ZONE,TAG);
 }
